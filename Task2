@@ -1,0 +1,71 @@
+\* Task2 Student grade tracker ,
+Develop a Java program to track and manage student grades. 
+The program should allow the user to input grades for different subjects or assignments, calculate the average grade, 
+and display the overall grade along with any additional information (such as letter grade or GPA)*/
+
+
+import java.util.Scanner;
+public class Task2{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);        
+        System.out.println("Welcome to the Student Grade Tracker!");
+        // Input number of subjects
+        System.out.print("Enter the number of subjects: ");
+        int numOfSubjects = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        
+        // Input grades for each subject
+        double totalGrade = 0;
+        for (int i = 1; i <= numOfSubjects; i++) {
+            System.out.print("Enter grade for subject " + i + ": ");
+            double grade = scanner.nextDouble();
+            totalGrade += grade;
+        }
+        
+        // Calculate average grade
+        double averageGrade = totalGrade / numOfSubjects;
+        System.out.println("Average grade: " + averageGrade);
+
+        // Calculate letter grade
+        char letterGrade = calculateLetterGrade(averageGrade);
+        System.out.println("Letter grade: " + letterGrade);
+
+        // Calculate GPA
+        int gpa = calculateGPA(letterGrade);
+       
+        System.out.println("GPA: " + gpa+ "/5");
+
+        scanner.close();
+    }
+
+    // Method to calculate letter grade
+    public static char calculateLetterGrade(double averageGrade) {
+        if (averageGrade >= 90) {
+            return 'A';
+        } else if (averageGrade >= 80) {
+            return 'B';
+        } else if (averageGrade >= 70) {
+            return 'C';
+        } else if (averageGrade >= 60) {
+            return 'D';
+        } else {
+            return 'F';
+        }
+    }
+
+    // Method to calculate GPA
+    public static int calculateGPA(char letterGrade) {
+        switch (letterGrade) {
+            case 'A':
+                return 4;
+            case 'B':
+                return 3;
+            case 'C':
+                return 2;
+            case 'D':
+                return 1;
+            default:
+                return 0;
+        }
+    }
+}
